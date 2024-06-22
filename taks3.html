@@ -1,0 +1,113 @@
+part1:
+   
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+<script>
+var jsonString1 = '{"name": "person 1", "age":5}';
+
+var jsonString2 = '{"age":5,"name": "person 1"}';
+
+var obj1 = JSON.parse(jsonString1);
+
+var obj2 = JSON.parse(jsonString2);
+
+function objectsEqual(obj1, obj2) {
+
+var jsonStr1 = JSON.stringify(obj1, Object.keys(obj1).sort());
+
+var jsonStr2 = JSON.stringify(obj2, Object.keys(obj2).sort());
+
+return jsonStr1 === jsonStr2;
+
+}
+
+if (objectsEqual(obj1, obj2)) {
+
+console.log("Objects are equal (ignoring property order).");
+
+} else {
+
+console.log("Objects are not equal.");
+
+}
+</script>
+</body>
+</html>
+
+
+
+part 2:
+
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+</head>
+
+<body>
+
+<script>
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "https://restcountries.com/v3.1/all", true);
+xhr.onload = function () {
+ if (xhr.status >= 200 && xhr.status < 300){ 
+ var response = JSON.parse(xhr.responseText);
+ console.log(response);
+ response.forEach((country) => {
+ console.log(country.flags.png);
+});
+} 
+else {
+    console.log("The Request failed");
+}
+};
+xhr.send();
+</script>
+</body>
+</html>
+
+
+part 3:
+
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+</head>
+
+<body>
+
+<script>
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "https://restcountries.com/v3.1/all", true);
+xhr.onload = function () {
+ if (xhr.status >= 200 && xhr.status < 300){ 
+ var response = JSON.parse(xhr.responseText);
+ console.log(response);
+ response.forEach((country) => {
+ console.log(country.name.common);
+
+console.log(country.flags.png);
+
+console.log(country.region, country.subregion);
+
+console.log(country.population);
+
+});
+} 
+else {
+    console.log("The Request failed");
+}
+};
+xhr.send();
+</script>
+</body>
+</html>
